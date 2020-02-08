@@ -1,1 +1,4 @@
-# calculo_imposto_imovel
+# Calculo imposto Imóvel
+
+Projeto em PHP para cálculo de imposto sobre imóveis.
+
