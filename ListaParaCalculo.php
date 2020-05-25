@@ -49,11 +49,11 @@ include_once 'includes/message.php';
 				<tbody>
 					<?php
 					$sql = "SELECT * FROM imovel";
-					$resultado = mysqli_query($connect, $sql);
+					$resultado = pg_query($connect, $sql);
 	               
-	                if(mysqli_num_rows($resultado) > 0):
+	                if(pg_num_rows($resultado) > 0):
 
-					while($dados = mysqli_fetch_array($resultado)):
+					while($dados = pg_fetch_array($resultado)):
 					?>
 					<tr>
 						<td><?php echo $dados['id_imovel']; ?></td>
