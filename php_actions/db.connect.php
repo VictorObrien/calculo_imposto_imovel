@@ -11,5 +11,4 @@ $conexao = pg_connect("host=$servidor port=$porta dbname=$bancoDeDados user=$usu
 if(!$conexao) {
 	die("Não foi possível se conectar ao banco de dados.");
 }
-
 ?>

@@ -97,7 +97,7 @@ include_once 'includes/message.php';
 				</tbody>
 			</table>
 		<br>
-		<a href="proprietario.php" class="btn btn-primary">Adicionar Proprietário</a>
+		<a href="insiraProprietario.php" class="btn btn-primary">Adicionar Proprietário</a>
 
 		
 <?php

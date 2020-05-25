@@ -22,10 +22,11 @@ if(isset($_POST['btn-editarProprietario'])):
 	endif;
 endif;
 
+//Update Tabela Imóvel
 if(isset($_POST['btn-editarImovel'])):
 
 	$proprietario_id = pg_escape_string($connect, $_POST['proprietario_id']);
-	$endereco = pg_escape_string($connect, $_POST['endereco']);
+	$endereco_imovel = pg_escape_string($connect, $_POST['endereco_imovel']);
 	$area_do_terreno = pg_escape_string($connect, $_POST['area_do_terreno']);
 	$area_construida = pg_escape_string($connect, $_POST['area_construida']);
 	//$area_total = mysqli_escape_string($connect, $_POST['area_total']);
@@ -36,9 +37,9 @@ if(isset($_POST['btn-editarImovel'])):
 	//$aliquota_aplicada = cmysqli_escape_string($connect, $_POST['aliquota_aplicada']);
 	$valor_do_imposto = pg_escape_string($connect, $_POST['valor_do_imposto']);
 
-	$id = pg_escape_string($connect, $_POST['id']);	
+	$id_imovel = pg_escape_string($connect, $_POST['id_imovel']);	
 
-	$sql = "UPDATE imovel SET proprietario_id = '$proprietario_id', endereco = '$endereco', area_do_terreno = '$area_do_terreno', area_construida = '$area_construida', area_total = '$area_total', aliquota = '$aliquota', valor_venal_terreno = '$valor_venal_terreno', valor_venal_construcao = '$valor_venal_construcao', valor_venal_total = '$valor_venal_total', aliquota_aplicada = '$aliquota_aplicada', valor_do_imposto = '$valor_do_imposto' WHERE id = '$id'";
+	$sql = "UPDATE imovel SET proprietario_id = '$proprietario_id', endereco = '$endereco', area_do_terreno = '$area_do_terreno', area_construida = '$area_construida', area_total = '$area_total', aliquota = '$aliquota', valor_venal_terreno = '$valor_venal_terreno', valor_venal_construcao = '$valor_venal_construcao', valor_venal_total = '$valor_venal_total', aliquota_aplicada = '$aliquota_aplicada', valor_do_imposto = '$valor_do_imposto' WHERE id_imovel = '$id_imovel'";
 
 	if(pg_query($connect, $sql)):
 		$_SESSION['mensagem'] = "Atualizado com sucesso!";

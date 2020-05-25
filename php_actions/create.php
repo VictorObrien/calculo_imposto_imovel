@@ -34,7 +34,7 @@ endif;
 // Cadastrar na Tabela Imóvel
 if(isset($_POST['btn_cadastrar_imovel'])):
 	$proprietario_id = clear($_POST['proprietario_id']);
-	$endereco = clear($_POST['endereco']);
+	$endereco_imovel = clear($_POST['endereco_imovel']);
 	$area_do_terreno = clear($_POST['area_do_terreno']);
 	$area_construida = clear($_POST['area_construida']);
 	$area_total = clear($_POST['area_total']);

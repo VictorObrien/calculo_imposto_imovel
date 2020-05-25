@@ -4,6 +4,7 @@ session_start();
 // Conexão
 require_once 'db.connect.php';
 
+//Delete Tabela Proprietário
 if(isset($_POST['btn-deletar'])):
 	
 	$id = pg_escape_string($connect, $_POST['id']);
@@ -19,11 +20,12 @@ if(isset($_POST['btn-deletar'])):
 	endif;
 endif;
 
+//Delete Tabela Imóvel
 if(isset($_POST['btn-deletar'])):
 	
-	$id = pg_escape_string($connect, $_POST['id']);
+	$id_imovel = pg_escape_string($connect, $_POST['id_imovel']);
 
-	$sql = "DELETE FROM imovel WHERE id = '$id'";
+	$sql = "DELETE FROM imovel WHERE id_imovel = '$id_imovel'";
 
 	if(pg_query($connect, $sql)):
 		$_SESSION['mensagem'] = "Deletado com sucesso!";

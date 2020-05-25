@@ -4,10 +4,10 @@ include_once 'php_actions/db.connect.php';
 // Header
 include_once 'includes/header.php';
 // Select
-if(isset($_GET['id'])):
-	$id = pg_escape_string($connect, $_GET['id']);
+if(isset($_GET['id_imovel'])):
+	$id_imovel = pg_escape_string($connect, $_GET['id_imovel']);
 
-	$sql = "SELECT * FROM imovel WHERE id = '$id'";
+	$sql = "SELECT * FROM imovel WHERE id_imovel = '$id_imovel'";
 	$resultado = pg_query($connect, $sql);
 	$dados = pg_fetch_array($resultado);
 endif;
@@ -37,7 +37,7 @@ endif;
 	    <div class="col-md-4">
 		<h3 class="light"> Editar Imóveis </h3>
 		<form action="php_actions/update.php" method="POST">
-			<input type="hidden" name="id" value="<?php echo $dados['id'];?>">
+			<input type="hidden" name="id_imovel" value="<?php echo $dados['id_imovel'];?>">
 			
 			<div class="form-group">
 						<label for="nome">Id Proprietário</label>
@@ -46,7 +46,7 @@ endif;
 					
 					<div class="form-group">
 						<label for="nome">Endereço Imóvel</label>
-						<input type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço Imóvel" value="<?php echo $dados['endereco'];?>">
+						<input type="text" class="form-control" id="endereco_imovel" name="endereco_imovel" placeholder="Endereço Imóvel" value="<?php echo $dados['endereco_imovel'];?>">
 					</div>
 
 					<div class="form-group">
