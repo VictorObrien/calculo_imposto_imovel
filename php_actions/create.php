@@ -8,7 +8,7 @@ function clear($input) {
 	
 	global $connect;
 	// sql
-	$var = mysqli_escape_string($connect, $input);
+	$var = pg_escape_string($connect, $input);
 	// xss
 	$var = htmlspecialchars($var);
 	return $var;
@@ -22,7 +22,7 @@ if(isset($_POST['btn_cadastrar_proprietario'])):
 
 	$sql = "INSERT INTO proprietario (nome, endereco) VALUES ('$nome', '$endereco')";
 
-	if(mysqli_query($connect, $sql)):
+	if(pg_query($connect, $sql)):
 		$_SESSION['mensagem'] = "Cadastrado com sucesso!";
 		header('Location: ../index.php');
 	else:
@@ -34,7 +34,7 @@ endif;
 // Cadastrar na Tabela Imóvel
 if(isset($_POST['btn_cadastrar_imovel'])):
 	$proprietario_id = clear($_POST['proprietario_id']);
-	$endereco_imovel = clear($_POST['endereco_imovel']);
+	$endereco = clear($_POST['endereco']);
 	$area_do_terreno = clear($_POST['area_do_terreno']);
 	$area_construida = clear($_POST['area_construida']);
 	$area_total = clear($_POST['area_total']);
@@ -48,7 +48,7 @@ if(isset($_POST['btn_cadastrar_imovel'])):
 
 	$sql = "INSERT INTO imovel (proprietario_id, endereco, area_do_terreno, area_construida, area_total, aliquota, valor_venal_terreno, valor_venal_construcao, valor_venal_total, aliquota_aplicada, valor_do_imposto ) VALUES ('$proprietario_id', '$endereco', '$area_do_terreno', '$area_construida', '$area_total', '$aliquota', '$valor_venal_terreno', '$valor_venal_construcao', '$valor_venal_total', '$aliquota_aplicada', '$valor_do_imposto' )";
 
-	if(mysqli_query($connect, $sql)):
+	if(pg_query($connect, $sql)):
 		$_SESSION['mensagem'] = "Cadastrado com sucesso!";
 		header('Location: ../index.php');
 	else:

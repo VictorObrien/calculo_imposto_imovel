@@ -1,4 +1,4 @@
-<?php
+pg<?php
 // Conexão
 include_once 'php_actions/db.connect.php';
 // Header
@@ -49,28 +49,28 @@ include_once 'includes/message.php';
 				<tbody>
 					<?php
 					$sql = "SELECT * FROM imovel";
-					$resultado = mysqli_query($connect, $sql);
+					$resultado = pg_query($connect, $sql);
 	               
-	                if(mysqli_num_rows($resultado) > 0):
+	                if(pg_num_rows($resultado) > 0):
 
-					while($dados = mysqli_fetch_array($resultado)):
+					while($dados = pg_fetch_array($resultado)):
 					?>
 					<tr>
-						<td><?php echo $dados['id_imovel']; ?></td>
+						<td><?php echo $dados['id']; ?></td>
 						<td><?php echo $dados['proprietario_id']; ?></td>
-						<td><?php echo $dados['endereco_imovel']; ?></td>
+						<td><?php echo $dados['endereco']; ?></td>
 						<td><?php echo $dados['area_do_terreno']; ?></td>
 						<td><?php echo $dados['area_construida']; ?></td>
 						<td><?php echo $dados['valor_venal_terreno']; ?></td>
 						<td><?php echo $dados['valor_venal_construcao']; ?></td>
 						<td><?php echo $dados['aliquota_aplicada']; ?></td>
 
-						<td><a href="editarImovel.php?id_imovel=<?php echo $dados['id_imovel']; ?>" class="btn-floating orange"><i class="material-icons">edit</i></a></td>
+						<td><a href="editarImovel.php?id=<?php echo $dados['id']; ?>" class="btn-floating orange"><i class="material-icons">edit</i></a></td>
 
-						<td><a href="#modal<?php echo $dados['id_imovel']; ?>" class="btn-floating red modal-trigger"><i class="material-icons">delete</i></a></td>
+						<td><a href="#modal<?php echo $dados['id']; ?>" class="btn-floating red modal-trigger"><i class="material-icons">delete</i></a></td>
 
 						<!-- Modal Structure -->
-						  <div id="modal<?php echo $dados['id_imovel']; ?>" class="modal">
+						  <div id="modal<?php echo $dados['id']; ?>" class="modal">
 						    <div class="modal-content">
 						      <h4>Opa!</h4>
 						      <p>Tem certeza que deseja excluir esse imóvel?</p>
@@ -78,7 +78,7 @@ include_once 'includes/message.php';
 						    <div class="modal-footer">					     
 
 						      <form action="php_actions/delete.php" method="POST">
-						      	<input type="hidden" name="id_imovel" value="<?php echo $dados['id_imovel']; ?>">
+						      	<input type="hidden" name="id" value="<?php echo $dados['id']; ?>">
 						      	<button type="submit" name="btn-deletar" class="btn red">Sim, quero deletar</button>
 
 						      	 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
@@ -94,7 +94,13 @@ include_once 'includes/message.php';
 					endwhile;
 					else: ?>
 
-					
+					<tr>
+						<td>-</td>
+						<td>-</td>
+						<td>-</td>
+						<td>-</td>
+					</tr>
+
 				   <?php 
 					endif;
 				   ?>

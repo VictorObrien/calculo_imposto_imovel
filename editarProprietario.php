@@ -5,11 +5,11 @@ include_once 'php_actions/db.connect.php';
 include_once 'includes/header.php';
 // Select
 if(isset($_GET['id'])):
-	$id = mysqli_escape_string($connect, $_GET['id']);
+	$id = pg_escape_string($connect, $_GET['id']);
 
 	$sql = "SELECT * FROM proprietario WHERE id = '$id'";
-	$resultado = mysqli_query($connect, $sql);
-	$dados = mysqli_fetch_array($resultado);
+	$resultado = pg_query($connect, $sql);
+	$dados = pg_fetch_array($resultado);
 endif;
 ?>
 

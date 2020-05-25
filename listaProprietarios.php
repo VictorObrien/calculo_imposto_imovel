@@ -44,11 +44,11 @@ include_once 'includes/message.php';
 				<tbody>
 					<?php
 					$sql = "SELECT * FROM proprietario";
-					$resultado = mysqli_query($connect, $sql);
+					$resultado = pg_query($connect, $sql);
 	               
-	                if(mysqli_num_rows($resultado) > 0):
+	                if(pg_num_rows($resultado) > 0):
 
-					while($dados = mysqli_fetch_array($resultado)):
+					while($dados = pg_fetch_array($resultado)):
 					?>
 					<tr>
 						<td><?php echo $dados['id']; ?></td>
@@ -97,7 +97,7 @@ include_once 'includes/message.php';
 				</tbody>
 			</table>
 		<br>
-		<a href="insiraProprietario.php" class="btn btn-primary">Adicionar Proprietário</a>
+		<a href="proprietario.php" class="btn btn-primary">Adicionar Proprietário</a>
 
 		
 <?php

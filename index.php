@@ -7,7 +7,7 @@ include_once 'includes/header.php';
 include_once 'includes/message.php';
 ?>
 
-<!-- Static navbar -->
+		<!-- Static navbar -->
 	    <nav class="navbar navbar-default navbar-static-top">
 	      <div class="container">
 	        <div class="navbar-header">
@@ -22,36 +22,171 @@ include_once 'includes/message.php';
 	        
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
-	            <li><a href="listaProprietarios.php" class="btn-flat">Consultar Proprietarios</a></li>
-	            <li><a href="listaImoveis.php" class="btn-flat">Consultar Imóveis</a></li>           
+	            <li><a href="proprietario.php" class="btn-flat">Inserir Cliente</a></li>
+	            <li><a href="dadosImovel.php" class="btn-flat">Inserir Imóvel</a></li>           
 			  </ul>
 	        </div><!--/.nav-collapse -->
 	      </div>
 	    </nav>
 
-	<div class="container">
+
+	    <div class="container">
 
 	     
-	    <div class="jumbotron">
-	        <h2 align="center">Bem vindo ao Calcular Imposto do seu Imóvel</h2>
-	        <br>
-	        <h3 align="center">
-	        	1 - Primeiro Insira os dados do Proprietário
-	        </h3>	    
-			<a href="insiraProprietario.php"  class="btn btn-primary btn-lg btn-block">Adicionar cliente</a>
-			<h3 align="center">
-	        	2 - Depois Insira os dados do Imóvel
-	        </h3>	
-			<a href="insiraImovel.php" class="btn btn-primary btn-lg btn-block">Adicionar Imóvel</a>
-			<h3 align="center">
-	        	3 - E por fim Calcule o Imposto.
-	        </h3>
-			<a href="listaParaCalculo.php" name="btn-calculaImposto" class="btn btn-success btn-lg btn-block">Calcular Imposto</a>
-		    <div class="clearfix"></div>		    
-	    </div>
+	      <div class="jumbotron">
+	        <h2>Bem vindo ao Calcular Imposto do seu Imóvel</h2>
+	      </div>
+
+	      <h3 class="light"> Proprietários </h3>
+		<table class="striped">
+			<thead>
+				<tr>
+					<th>Id:</th>
+					<th>Nome:</th>
+					<th>Endereço:</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<?php
+				$sql = "SELECT * FROM proprietario";
+				$resultado = pg_query($connect, $sql);
+               
+                if(pg_num_rows($resultado) > 0):
+
+				while($dados = pg_fetch_array($resultado)):
+				?>
+				<tr>
+					<td><?php echo $dados['id']; ?></td>
+					<td><?php echo $dados['nome']; ?></td>
+					<td><?php echo $dados['endereco']; ?></td>
+					<td><a href="editarProprietario.php?id=<?php echo $dados['id']; ?>" class="btn-floating orange"><i class="material-icons">edit</i></a></td>
+
+					<td><a href="#modal<?php echo $dados['id']; ?>" class="btn-floating red modal-trigger"><i class="material-icons">delete</i></a></td>
+
+					<!-- Modal Structure -->
+					  <div id="modal<?php echo $dados['id']; ?>" class="modal">
+					    <div class="modal-content">
+					      <h4>Opa!</h4>
+					      <p>Tem certeza que deseja excluir esse proprietário?</p>
+					    </div>
+					    <div class="modal-footer">					     
+
+					      <form action="php_actions/delete.php" method="POST">
+					      	<input type="hidden" name="id" value="<?php echo $dados['id']; ?>">
+					      	<button type="submit" name="btn-deletar" class="btn red">Sim, quero deletar</button>
+
+					      	 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+
+					      </form>
+
+					    </div>
+					  </div>
 
 
-	</div>
+				</tr>
+			   <?php 
+				endwhile;
+				else: ?>
+
+				<tr>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+				</tr>
+
+			   <?php 
+				endif;
+			   ?>
+
+			</tbody>
+		</table>
+		<br>
+		<a href="proprietario.php" class="btn btn-primary">Adicionar cliente</a>
+
+		<br><br>
+		<h3 class="light"> Imóveis </h3>
+		<table class="striped">
+			<thead>
+				<tr>
+					<th>Id:</th>
+					<th>Proprietário:</th>
+					<th>Endereço:</th>
+					<th>Área Terreno:</th>
+					<th>Área Construída:</th>
+					<th>Valor Venal Terreno:</th>
+					<th>Valor Venal Construção:</th>
+					<th>Aliquota Aplicada:</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<?php
+				$sql = "SELECT * FROM imovel";
+				$resultado = pg_query($connect, $sql);
+               
+                if(pg_num_rows($resultado) > 0):
+
+				while($dados = pg_fetch_array($resultado)):
+				?>
+				<tr>
+					<td><?php echo $dados['id']; ?></td>
+					<td><?php echo $dados['proprietario_id']; ?></td>
+					<td><?php echo $dados['endereco']; ?></td>
+					<td><?php echo $dados['area_do_terreno']; ?></td>
+					<td><?php echo $dados['area_construida']; ?></td>
+					<td><?php echo $dados['valor_venal_terreno']; ?></td>
+					<td><?php echo $dados['valor_venal_construcao']; ?></td>
+					<td><?php echo $dados['aliquota_aplicada']; ?></td>
+
+					<td><a href="editarImovel.php?id=<?php echo $dados['id']; ?>" class="btn-floating orange"><i class="material-icons">edit</i></a></td>
+
+					<td><a href="#modal<?php echo $dados['id']; ?>" class="btn-floating red modal-trigger"><i class="material-icons">delete</i></a></td>
+
+					<!-- Modal Structure -->
+					  <div id="modal<?php echo $dados['id']; ?>" class="modal">
+					    <div class="modal-content">
+					      <h4>Opa!</h4>
+					      <p>Tem certeza que deseja excluir esse imóvel?</p>
+					    </div>
+					    <div class="modal-footer">					     
+
+					      <form action="php_actions/delete.php" method="POST">
+					      	<input type="hidden" name="id" value="<?php echo $dados['id']; ?>">
+					      	<button type="submit" name="btn-deletar" class="btn red">Sim, quero deletar</button>
+
+					      	 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+
+					      </form>
+
+					    </div>
+					  </div>
+
+
+				</tr>
+			   <?php 
+				endwhile;
+				else: ?>
+
+				<tr>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+				</tr>
+
+			   <?php 
+				endif;
+			   ?>
+
+			</tbody>
+		</table>
+		<br>
+		<a href="dadosImovel.php" class="btn btn-primary">Adicionar Imóvel</a>
+		<a href="calcularImposto.php" class="btn btn-primary">Calcular Imposto</a>
+	      <div class="clearfix"></div>
+		</div>
 <?php
 // Footer
 include_once 'includes/footer.php';

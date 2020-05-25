@@ -1,18 +1,10 @@
 <?php
-// Conexão
-include_once 'php_actions/db.connect.php';
 // Header
 include_once 'includes/header.php';
-// Select
-if(isset($_GET['id'])):
-	$id = pg_escape_string($connect, $_GET['id']);
 
-	$sql = "SELECT * FROM imovel WHERE id = '$id'";
-	$resultado = pg_query($connect, $sql);
-	$dados = pg_fetch_array($resultado);
-endif;
 ?>
-<!-- Static navbar -->
+
+		<!-- Static navbar -->
 	    <nav class="navbar navbar-default navbar-static-top">
 	      <div class="container">
 	        <div class="navbar-header">
@@ -33,30 +25,35 @@ endif;
 	      </div>
 	    </nav>
 
-<div class="col-md-4"></div>
-	    <div class="col-md-4">
-		<h3 class="light"> Editar Imóveis </h3>
-		<form action="php_actions/update.php" method="POST">
-			<input type="hidden" name="id" value="<?php echo $dados['id'];?>">
-			
-			<div class="form-group">
+
+	    <div class="container">
+	    	
+	    	<br /><br />
+
+	    	<div class="col-md-4"	></div>
+	    	<div class="col-md-4">
+	    		<h3>Insira os dados do Imóvel.</h3>
+	    		<br />
+				<form method="post" action="php_actions/create.php" id="formImovel">
+
+					<div class="form-group">
 						<label for="nome">Id Proprietário</label>
-						<input type="text" class="form-control" id="proprietario_id" name="proprietario_id" placeholder="Código Proprietário" value="<?php echo $dados['proprietario_id'];?>">
+						<input type="text" class="form-control" id="proprietario_id" name="proprietario_id" placeholder="Código Proprietário" required="requiored">
 					</div>
 					
 					<div class="form-group">
 						<label for="nome">Endereço Imóvel</label>
-						<input type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço Imóvel" value="<?php echo $dados['endereco'];?>">
+						<input type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço Imóvel" required="requiored">
 					</div>
 
 					<div class="form-group">
 						<label for="nome">Área do Terreno</label>
-						<input type="number" class="form-control" id="area_do_terreno" name="area_do_terreno" placeholder="Área do Terreno" value="<?php echo $dados['area_do_terreno'];?>">
+						<input type="number" class="form-control" id="area_do_terreno" name="area_do_terreno" placeholder="Área do Terreno" required="requiored">
 					</div>
 
 					<div class="form-group">
 						<label for="nome">Área Construida</label>
-						<input type="number" class="form-control" id="area_construida" name="area_construida" placeholder="Área Construida" value="<?php echo $dados['area_construida'];?>">
+						<input type="number" class="form-control" id="area_construida" name="area_construida" placeholder="Área Construida" required="requiored">
 					</div>
 
 					<!--<div class="form-group">
@@ -66,17 +63,17 @@ endif;
 
 					<div class="form-group">
 						<label for="nome">Aliquota</label>
-						<input type="text" class="form-control" id="aliquota" name="aliquota" placeholder="Aliquota" value="<?php echo $dados['aliquota'];?>">
+						<input type="text" class="form-control" id="aliquota" name="aliquota" placeholder="Aliquota" required="requiored">
 					</div>
 
 					<div class="form-group">
 						<label for="nome">Valor Venal Terreno</label>
-						<input type="number" class="form-control" id="valor_venal_terreno" name="valor_venal_terreno" placeholder="Valor Venal Terreno" value="<?php echo $dados['valor_venal_terreno'];?>">
+						<input type="number" class="form-control" id="valor_venal_terreno" name="valor_venal_terreno" placeholder="Valor Venal Terreno" required="requiored">
 					</div>
 
 					<div class="form-group">
 						<label for="nome">Valor Venal Construção</label>
-						<input type="number" class="form-control" id="valor_venal_construcao" name="valor_venal_construcao" placeholder="Valor Venal Construção" value="<?php echo $dados['valor_venal_construcao'];?>">
+						<input type="number" class="form-control" id="valor_venal_construcao" name="valor_venal_construcao" placeholder="Valor Venal Construção">
 					</div>
 
 					<!--<div class="form-group">
@@ -93,13 +90,13 @@ endif;
 						<label for="nome">Valor do Imposto</label>
 						<input type="number" class="form-control" id="valor_do_imposto" name="valor_do_imposto" placeholder="Valor do Imposto">
 					</div>-->
+										
+					<button type="submit" name="btn_cadastrar_imovel" class="btn btn-primary form-control">Inserir</button>
 
-			<button type="submit" name="btn-editarImovel" class="btn btn-primary"> Atualizar</button>
-			<a href="listaImoveis.php" class="btn btn-green"> Lista de Imóveis </a>
-		</form>
-		
-	</div>
-</div>
+				</form>
+			</div>
+			
+		</div>
 
 <?php
 // Footer
